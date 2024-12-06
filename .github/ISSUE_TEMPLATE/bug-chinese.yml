@@ -1,8 +1,8 @@
 name: Bug 提交 [中文版本]
-description: 提交 Redefine 主题的 Bug 报告
+description: 提交 Leaflet 主题的 Bug 报告
 title: "[BUG] "
 labels: ["bug"]
-assignees: ["EvanNotFound"]
+assignees: ["LeavesWebber"]
 body:
   - type: markdown
     attributes:
