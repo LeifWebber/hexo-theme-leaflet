@@ -26,7 +26,11 @@ body:
     id: bug-description
     attributes:
       label: "What's the issue?"
+<<<<<<< HEAD
       description: "Tell us what's happening. Please include your relevant config settings from `_config.yml` and `_config.hexo-theme-leaflet.yml` (remember to remove any sensitive info)."
+=======
+      description: "Tell us what's happening. Please include your relevant config settings from `_config.yml` and `_config.redefine.yml` (remember to remove any sensitive info)."
+>>>>>>> 65fe2621023077972bd0b91c69df172b80e1d22f
     validations:
       required: true
 
