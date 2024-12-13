@@ -195,6 +195,9 @@ navbar:
     pages: 1200px #other pages
   # Navbar links
   links:
+    主页: #取名随意
+      icon: fa-solid fa-home #图标
+      path: / #链接
     标签: #取名随意
       icon: fa-solid fa-tags #图标
       path: /tags/ #链接
@@ -216,7 +219,7 @@ navbar:
     关于我:
       icon: fa-solid fa-address-book
       submenus:
-        ✨ 简 介 : /me/
+        ✨ 简 介 : /me_en/
         💎 记 忆 : /masonry/
     # Status:
     #   path: https://status.ohevan.com/
@@ -257,7 +260,7 @@ home:
     links:
       进一步了解我？: #取名随意
         icon: fa-solid fa-address-card #图标
-        path: /me/
+        path: /me_en/
       最近更新了什么？:
         icon: fa-solid fa-solid fa-sparkles
         path: /Gitlog/
@@ -355,7 +358,11 @@ articles:
     # Placeholder image
     placeholder: /images/wallhaven-wqery6-light.webp
     # Skip directory
-    skip_dirs: source/_posts/_TIPS for Blue Topaz
+    skip_dirs:
+    - source/_posts/_TIPS for Blue Topaz
+    - source/me/
+    - source/me_en/
+
 # ARTICLE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -376,8 +383,7 @@ comment:
       recaptchaV3Key: # Google reCAPTCHA v3 key. See https://waline.js.org/reference/client/props.html#recaptchav3key
       turnstileKey: # Turnstile key. See https://waline.js.org/reference/client/props.html#turnstilekey
       reaction: true # Waline reaction. See https://waline.js.org/reference/client/props.html#reaction
-      locale:
-        placeholder: "畅所欲言！评论区已接入Markdown语法，您也可以先登录QQ再评论~"
+      placeholder: "畅所欲言！评论区支持 Markdown 语法。若想显示头像，您可以通过 QQ 或 Github 登录后再评论"
     # Gitalk comment system. See https://github.com/gitalk/gitalk
     gitalk:
       clientID: # GitHub Application Client ID
@@ -437,7 +443,6 @@ inject:
     -
     # Inject custom footer html code
   footer:
-    -
     -
       # INJECT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
