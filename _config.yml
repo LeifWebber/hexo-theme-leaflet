@@ -84,7 +84,7 @@ global:
   single_page: true
   # Whether to enable Preloader.
   preloader:
-    enable: true
+    enable: false
     custom_message: Leaves' blog # Custom message. If empty, the site title will be displayed
   # Whether to enable open graph
   open_graph:
@@ -140,14 +140,14 @@ home_banner:
     smart_backspace: true # Whether to smart backspace
   # Color of home banner text
   text_color:
-    light: "#003366" # light mode
+    light: "#003582" # light mode #003366
     dark: "#E6E6E6" # dark mode 亮青#A8DADC 亮白#E6E6E6 暗白#D1D1D1
   # Specific style of the text
   text_style:
     # Title font size
-    title_size: 2.8rem
+    title_size: 3.0rem #2.8rem
     # Subtitle font size
-    subtitle_size: 1.5rem
+    subtitle_size: 1.5rem #1.5rem
     # Line height between title and subtitle
     line_height: 1.4
   # Home banner custom font
@@ -186,9 +186,14 @@ navbar:
   auto_hide: false
   # Navbar background color
   color:
-    left: "#B0E0E6" #left side
-    right: "#F4A460"  #right side
-    transparency: 5 #percent (10-99)
+    light:
+      left: "#D5E4F1"
+      right: "#769FD2"
+      transparency: 65
+    dark:
+      left: "#6390B9"
+      right: "#B98B64"
+      transparency: 35
   # Navbar width (usually no need to modify)
   width:
     home: 1300px #home page

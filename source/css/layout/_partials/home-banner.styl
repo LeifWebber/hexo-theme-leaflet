@@ -9,7 +9,6 @@ $home-banner-icon-size = 1.6rem
 @require '../../common/variables'
 
 .home-banner-background
-  //background var(--home-banner-img) center center / cover no-repeat
   transition filter 0.3s ease
 
 .home-banner-container
@@ -30,12 +29,14 @@ $home-banner-icon-size = 1.6rem
       font-size $title-font-size
       line-height $line-height
       color var(--home-banner-text-color)
+      text-shadow: 0 2px 8px rgb(80, 80, 80)
 
       p
         margin 0
         opacity 0.9
         font-family 'Geist Variable', sans-serif
         font-weight 350
+        text-shadow: 0 2px 8px rgb(87, 87, 87)
 
         i
           font-size $subtitle-font-size

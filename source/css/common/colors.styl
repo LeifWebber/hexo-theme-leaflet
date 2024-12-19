@@ -10,6 +10,16 @@ $nav-color-1 = convert(hexo-config('navbar.color.left') + hexo-config('navbar.co
 $nav-color-2 = convert(hexo-config('navbar.color.right') + hexo-config('navbar.color.transparency'))
 $nav-color-bg = linear-gradient(120deg, $nav-color-1 0%, $nav-color-2 100%)
 
+// Light mode navbar colors
+$nav-color-1-light = convert(hexo-config('navbar.color.light.left') + hexo-config('navbar.color.light.transparency'))
+$nav-color-2-light = convert(hexo-config('navbar.color.light.right') + hexo-config('navbar.color.light.transparency'))
+$nav-color-bg-light = linear-gradient(120deg, $nav-color-1-light 0%, $nav-color-2-light 100%)
+
+// Dark mode navbar colors  
+$nav-color-1-dark = convert(hexo-config('navbar.color.dark.left') + hexo-config('navbar.color.dark.transparency'))
+$nav-color-2-dark = convert(hexo-config('navbar.color.dark.right') + hexo-config('navbar.color.dark.transparency'))
+$nav-color-bg-dark = linear-gradient(120deg, $nav-color-1-dark 0%, $nav-color-2-dark 100%)
+
 // ========================================================================================
 //                                       LIGHT MODE
 // ========================================================================================
