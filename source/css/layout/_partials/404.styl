@@ -1,14 +1,34 @@
 .nf-container
 	width 100%
 	text-align center
+	padding 100px 20px
+	display flex
+	flex-direction column
+	align-items center
+	gap 30px
 
 .nf-text
-	vertical-align middle
+	display flex
+	flex-direction column
+	align-items center
+	gap 10px
 
 .nf-text h1
-	line-height 1
-	font-size 100px
-	vertical-align baseline
-	display inline-block
-	padding-right 12px
-	color var(first-text-color)
+	font-size 120px
+	color var(--first-text-color)
+	margin 0
+	text-shadow 8px 8px 0 var(--shadow-color-1)
+
+.nf-text h2
+	font-size 32px
+	color var(--second-text-color)
+	margin 0
+	font-weight 400
+
+.nf-button
+	margin-top: 30px
+
+	a.button
+		padding 15px 35px
+		font-size 20px
+		border-radius 30px

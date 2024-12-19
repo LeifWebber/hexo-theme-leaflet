@@ -21,11 +21,11 @@ info:
 
 defaults:
   # Favicon
-  favicon: https://tse1-mm.cn.bing.net/th/id/OIP-C.KJAMJ3c6UlBEEn_zIrahDwHaHa?w=202&h=202&c=7&r=0&o=5&pid=1.7
+  favicon: /images/favicon.ico
   # Site logo
   logo: https://www.emojiall.com/en/header-svg/%F0%9F%8D%83.svg
   # Site avatar
-  avatar: images/myAvatar.png
+  avatar: /images/myAvatar.png
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -121,8 +121,8 @@ home_banner:
   style: fixed # static or fixed
   # Home banner image
   image:
-    light: images/192110-1568028070e1cc.jpg
-    dark: images/DSC01010.JPG
+    light: /images/192110-1568028070e1cc.jpg
+    dark: /images/DSC01010.JPG
   # Home banner title
   title: 叶子のBlog
   # Home banner subtitle
@@ -174,7 +174,7 @@ home_banner:
       # ...... # you can add more
     # Social links with QRcode drawers
     qrs:
-      weixin: images/微信图片_20241106122958.jpg
+      weixin: /images/wechatqrs.jpg
       # ...... # you can add more
 # HOME BANNER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
@@ -300,7 +300,7 @@ articles:
     image_alignment: center # image alignment. left, center
     image_caption: true # Whether to display image caption
     link_icon: true # Whether to display link icon
-    delete_mask: true # Add mask effect to <del> tags, hiding content by default and revealing on hover
+    delete_mask: false # Add mask effect to <del> tags, hiding content by default and revealing on hover
     title_alignment: left # Title alignment. left, center
     headings_top_spacing: # Top spacing for headings from h1-h6
       h1: 3.2rem
