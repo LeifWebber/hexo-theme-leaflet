@@ -1,0 +1,57 @@
+/* 自定义鼠标样式 */
+if (hexo-config('global.custom_cursor.enable')) {
+    /* 替代链接和按钮的手型指针 */
+    a, 
+    button,
+    [role="button"],
+    input[type="submit"],
+    input[type="button"],
+    select,
+    summary,
+    .btn,
+    .links,
+    .tag-list a,
+    .category-list-link,
+    .search-popup .search-header .popup-btn-close,
+    .right-bottom-tools .tool-scroll-to-top,
+    .right-bottom-tools .tool-scroll-to-bottom,
+    .right-bottom-tools .toggle-tools-list,
+    .image-viewer-container img,
+    [class*="aplayer"] [class*="cursor"],
+    .home-content-container .home-article-container:hover,
+    .sidebar-content .avatar img:hover,
+    #masonry-container .masonry-item:hover,
+    [class*="button"],
+    [class*="btn"],
+    [role*="button"],
+    [class*="clickable"],
+    [class*="link"] {
+        cursor: url(hexo-config('global.custom_cursor.pointer')), pointer !important;
+    }
+
+    /* 替代文本输入的I形光标 */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="number"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="url"],
+    textarea,
+    .search-input,
+    [contenteditable="true"] {
+        cursor: url(hexo-config('global.custom_cursor.text')), text !important;
+    }
+
+    /* 图片缩放样式 */
+    img[data-fancybox],
+    .post-content img:hover,
+    .page-content img:hover {
+        cursor: url(hexo-config('global.custom_cursor.zoom')), zoom-in !important;
+    }
+
+    /* 默认鼠标样式（替代箭头） - 放在最后以避免被覆盖 */
+    *:not([class*="cursor"]):not(a):not(button):not([role="button"]):not(input):not(textarea):not(select):not(img) {
+        cursor: url(hexo-config('global.custom_cursor.default')), default;
+    }
+} 
