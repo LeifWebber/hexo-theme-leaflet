@@ -1,4 +1,3 @@
-
 <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
     <div class="info-container py-3 text-center">
         <% if (theme.footer.hasOwnProperty('customize') && theme.footer.customize) { %>
@@ -7,8 +6,8 @@
         <div class="text-center">
             &copy;
             <% if (theme.footer.hasOwnProperty('start') && theme.footer.start) { %>
-                <span><%= date(new Date(theme.footer.start), 'YYYY') %></span>
-                -
+              <span><%= date(new Date(theme.footer.start), 'YYYY') %></span>
+              -
             <% } %>
             <%= date(new Date(), 'YYYY') %>&nbsp;&nbsp;<%- theme.footer.icon || '<i class="fa-regular fa-computer-classic"></i>' %>&nbsp;&nbsp;<a href="<%= config.root %>"><%= theme.info.author || config.author %></a>
             <% if (theme.footer.hasOwnProperty('statistics') && theme.footer.statistics) {%>

@@ -129,12 +129,12 @@ home_banner:
   # Home banner image
   image:
     light: /images/192110-1568028070e1cc.jpg
-    dark: /images/DSC01010.JPG
+    dark: /images/mcbg1.png
   # Home banner title
-  title: 叶子のBlog
+  title: 叶子 の Blog
   # Home banner subtitle
   subtitle:
-    text: ["黄色的森林分出两条路，我选择人迹更少的那一条，从此决定我一生的道路。","“ Friends Don't Lie ”","“岑夫子，丹丘生，将进酒，杯莫停”——李白","“来了，爱了，给她一颗星星，走了。”——云天明","“月亮陪伴熬夜的人”——三葉Leaves","“人类不感谢罗辑”——《程心·时间之外的往事》"] # subtitle text, array
+    text: ["“想在看博客时听歌嘛？向下滑动，你会收获左下角的专辑封面”——三葉Leaves","“ Friends Don't Lie ”","“岑夫子，丹丘生，将进酒，杯莫停”——李白","“来了，爱了，给她一颗星星，走了。”——云天明","“月亮陪伴熬夜的人”——三葉Leaves","“人类不感谢罗辑”——《程心·时间之外的往事》"]
     hitokoto:  # 一言配置
       enable: false # Whether to enable hitokoto
       show_author: false # Whether to show author
@@ -148,7 +148,7 @@ home_banner:
   # Color of home banner text
   text_color:
     light: "#003582" # light mode #003366
-    dark: "#E6E6E6" # dark mode 亮青#A8DADC 亮白#E6E6E6 暗白#D1D1D1
+    dark: "#FFFFFF" # dark mode 亮青#A8DADC 亮白#E6E6E6 暗白#D1D1D1
   # Specific style of the text
   text_style:
     # Title font size
@@ -174,7 +174,7 @@ home_banner:
     # Social links
     links:
       github: https://github.com/LeavesWebber
-      fa-solid fa-envelope: mailto:leaveswebber@outlook.com
+      fa-solid fa-envelope: mailto:LeavesWebber@icloud.com
       bilibili: https://space.bilibili.com/515054976
       fa-solid fa-music: https://y.qq.com/n/ryqq/playlist/9362968509
       steam: https://steamcommunity.com/id/LeavesWebber/
@@ -356,7 +356,7 @@ articles:
   # Whether to enable lazyload for images
   lazyload: true
   # Pangu.js (automatically add space between Chinese and English). See https://github.com/vinta/pangu.js
-  pangu_js: true
+  pangu_js: false
   # Article recommendation. Requires nodejieba (npm install nodejieba). Transplanted from hexo-theme-volantis.
   recommendation:
     # Whether to enable article recommendation
@@ -449,10 +449,10 @@ footer:
 # Docs: https://redefine-docs.ohevan.com/inject
 inject:
   # Whether to enable inject
-  enable: false
+  enable: true
   # Inject custom head html code
   head:
-    -
+    - <link rel="stylesheet" href="/css/callout_blocks.css">
     # Inject custom footer html code
   footer:
     -
@@ -489,7 +489,7 @@ plugins:
   # Mermaid JS. Requires hexo-filter-mermaid-diagrams (npm i hexo-filter-mermaid-diagrams). See https://mermaid.js.org/
   mermaid:
     enable: true # enable mermaid or not
-    version: "11.4.1" # default v9.3.0
+    version: "9.3.0" # default v9.3.0
 # PLUGINS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
