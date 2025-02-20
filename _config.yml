@@ -21,11 +21,11 @@ info:
 
 defaults:
   # Favicon
-  favicon: /images/favicon.ico
+  favicon: https://pic.kiss1314.top/d/LeavesResource/webImage/favicon.ico
   # Site logo
   logo: https://www.emojiall.com/en/header-svg/%F0%9F%8D%83.svg
   # Site avatar
-  avatar: /images/myAvatar.png
+  avatar: https://pic.kiss1314.top/d/LeavesResource/webImage/myAvatar.png
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -89,7 +89,7 @@ global:
   # Whether to enable open graph
   open_graph:
     enable: true
-    image: https://leaves520-1326362500.cos.ap-nanjing.myqcloud.com/myThumbnail.jpg  # default og:image
+    image: https://pic.kiss1314.top/d/LeavesResource/webImage/myThumbnail.jpg  # default og:image
     description: 贵宾远至，不甚荣幸
   # Google Analytics
   google_analytics:
@@ -98,7 +98,7 @@ global:
   # 自定义鼠标样式
   custom_cursor:
     enable: true
-    default: /images/cursor/default.png
+    default: https://pic.kiss1314.top/d/LeavesResource/webImage/cursor/default.png
     pointer: /images/cursor/pointer.png
     text: /images/cursor/text.png
     zoom: /images/cursor/zoom.png  # 新增缩放鼠标样式
@@ -128,8 +128,8 @@ home_banner:
   style: fixed # static or fixed
   # Home banner image
   image:
-    light: /images/192110-1568028070e1cc.jpg
-    dark: /images/mcbg1.png
+    light: https://pic.kiss1314.top/d/LeavesResource/webImage/192110-1568028070e1cc.jpg
+    dark: https://pic.kiss1314.top/d/LeavesResource/webImage/mcbg1.png
   # Home banner title
   title: 叶子 の Blog
   # Home banner subtitle
@@ -181,7 +181,7 @@ home_banner:
       # ...... # you can add more
     # Social links with QRcode drawers
     qrs:
-      weixin: /images/wechatqrs.jpg
+      weixin: https://pic.kiss1314.top/d/LeavesResource/webImage/wechatqrs.jpg
       # ...... # you can add more
 # HOME BANNER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
@@ -472,19 +472,19 @@ plugins:
     audios:
       - name: III # audio name
         artist: Athletics # audio artist
-        url: https://kiss1314.top:5555/d/ShareMusic/III%E8%8A%82%E9%80%89.MP3?sign=VC78YE0BqQIgb-9pGyNTwG2_Pa9Xsp10iLXtkmYiFVQ=:0
+        url: https://ybkjzj.com:5555/d/ShareMusic/III%E8%8A%82%E9%80%89.MP3
         cover: https://y.qq.com/music/photo_new/T002R300x300M000003YD5WL23J6yo_1.jpg?max_age=2592000
-        lrc: https://kiss1314.top:5555/d/ShareMusic/III%E8%8A%82%E9%80%89.lrc?sign=XgMdbWI7CV_3wy9OLN8gwNdaGnaQrqZWwcSlQt3mqG8=:0
+        lrc: https://ybkjzj.com:5555/d/ShareMusic/III%E8%8A%82%E9%80%89.lrc
       - name: For A Better Day # audio name
         artist: Avicii # audio artist
-        url: https://kiss1314.top:5555/d/ShareMusic/For%20A%20Better%20Day%20-%20Avicii.ogg?sign=YZ-0vHo8V2uHgEoXkIb6ycWMxccJ9qvQxM5Ef9dU5pI=:0
+        url: https://ybkjzj.com:5555/d/ShareMusic/For%20A%20Better%20Day%20-%20Avicii.ogg
         cover: https://y.qq.com/music/photo_new/T002R300x300M0000025DJtv4FhwKg_1.jpg?max_age=2592000
-        lrc: https://kiss1314.top:5555/d/ShareMusic/For%20A%20Better%20Day%20-%20Avicii.lrc?sign=ajHgJPecrxpMo0n0AJC3xzluNGxb3Xyx-EDq5i_OqGU=:0
+        lrc: https://ybkjzj.com:5555/d/ShareMusic/For%20A%20Better%20Day%20-%20Avicii.lrc
       - name: 反方向的钟 # audio name
         artist: 九三 # audio artist
-        url: https://kiss1314.top:5555/d/ShareMusic/%E5%8F%8D%E6%96%B9%E5%90%91%E7%9A%84%E9%92%9F%20(Live)%20-%20%E4%B9%9D%E4%B8%89.mp3?sign=fvk1SetkntNd_eGHWgF9sYD06Ai1EPH6ALkXrTUVLeA=:0
+        url: https://ybkjzj.com:5555/d/ShareMusic/%E5%8F%8D%E6%96%B9%E5%90%91%E7%9A%84%E9%92%9F%20(Live)%20-%20%E4%B9%9D%E4%B8%89.mp3
         cover: https://y.qq.com/music/photo_new/T002R300x300M000000ChYiX44RISy_2.jpg?max_age=2592000
-        lrc: https://kiss1314.top:5555/d/ShareMusic/%E5%8F%8D%E6%96%B9%E5%90%91%E7%9A%84%E9%92%9F%20(Live)%20-%20%E4%B9%9D%E4%B8%89.lrc?sign=OeUDRCrGb4fMeTcv-Ms6KlwFPBwkBYhaB_FXa7uJbj4=:0
+        lrc: https://ybkjzj.com:5555/d/ShareMusic/%E5%8F%8D%E6%96%B9%E5%90%91%E7%9A%84%E9%92%9F%20(Live)%20-%20%E4%B9%9D%E4%B8%89.lrc
       # .... you can add more audios here
   # Mermaid JS. Requires hexo-filter-mermaid-diagrams (npm i hexo-filter-mermaid-diagrams). See https://mermaid.js.org/
   mermaid:
