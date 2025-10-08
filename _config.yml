@@ -13,7 +13,7 @@ info:
   # Author name
   author: 三葉Leaves
   # Site URL
-  url: https://kiss1314.top/
+  url: https://blog.oksanye.com/
 # BASIC INFORMATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -21,11 +21,11 @@ info:
 
 defaults:
   # Favicon
-  favicon: https://pic.kiss1314.top/d/LeavesResource/webImage/favicon.ico
+  favicon: https://pic.oksanye.com/favicon.ico
   # Site logo
   logo: https://www.emojiall.com/en/header-svg/%F0%9F%8D%83.svg
   # Site avatar
-  avatar: https://pic.kiss1314.top/d/LeavesResource/webImage/myAvatar.png
+  avatar: https://pic.oksanye.com/myAvatar.png
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -64,7 +64,7 @@ global:
   # Content max width
   content_max_width: 1000px
   # Sidebar width
-  sidebar_width: 330px
+  sidebar_width: 210px
   # Effects on mouse hover
   hover:
     shadow: true # shadow effect
@@ -75,7 +75,7 @@ global:
     percentage: true # percentage
   # Website counter
   website_counter:
-    url: /js/libs/vercount.js # counter API URL (using local file)
+    url: https://cn.vercount.one/js # counter API URL (no need to change)
     enable: true # enable website counter or not
     site_pv: true # site page view
     site_uv: true # site unique visitor
@@ -89,7 +89,7 @@ global:
   # Whether to enable open graph
   open_graph:
     enable: true
-    image: https://pic.kiss1314.top/d/LeavesResource/webImage/myThumbnail.jpg  # default og:image
+    image: https://pic.oksanye.com/myThumbnail.jpg  # default og:image
     description: 贵宾远至，不甚荣幸
   # Google Analytics
   google_analytics:
@@ -98,10 +98,10 @@ global:
   # 自定义鼠标样式
   custom_cursor:
     enable: true
-    default: https://pic.kiss1314.top/d/LeavesResource/webImage/cursor/default.png
+    default: /images/cursor/default.png
     pointer: /images/cursor/pointer.png
     text: /images/cursor/text.png
-    zoom: /images/cursor/zoom.png  # 新增缩放鼠标样式
+    zoom: /images/cursor/zoom.png
 # SITE CUSTOMIZATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -128,8 +128,8 @@ home_banner:
   style: fixed # static or fixed
   # Home banner image
   image:
-    light: https://pic.kiss1314.top/d/LeavesResource/webImage/192110-1568028070e1cc.jpg
-    dark: https://pic.kiss1314.top/d/LeavesResource/webImage/mcbg1.png
+    light: https://pic.oksanye.com/192110-1568028070e1cc.webp
+    dark: https://pic.oksanye.com/mcbg1.webp
   # Home banner title
   title: 叶子 の Blog
   # Home banner subtitle
@@ -181,7 +181,7 @@ home_banner:
       # ...... # you can add more
     # Social links with QRcode drawers
     qrs:
-      weixin: https://pic.kiss1314.top/d/LeavesResource/webImage/wechatqrs.jpg
+      weixin: https://pic.oksanye.com/wechatqrs.jpg
       # ...... # you can add more
 # HOME BANNER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
@@ -389,7 +389,7 @@ comment:
   config:
     # Waline comment system. See https://waline.js.org/
     waline:
-      serverUrl: https://comment.kiss1314.top/ # Waline server URL. e.g. https://example.example.com
+      serverUrl: https://comment.oksanye.com # Waline server URL. e.g. https://example.example.com
       lang: zh-CN # Waline language. e.g. zh-CN, en-US. See https://waline.js.org/guide/client/i18n.html
       emoji: ['//unpkg.com/@waline/emojis@1.2.0/soul-emoji'] # Waline emojis, see https://waline.js.org/guide/features/emoji.html
       recaptchaV3Key: # Google reCAPTCHA v3 key. See https://waline.js.org/reference/client/props.html#recaptchav3key
@@ -455,11 +455,11 @@ inject:
     - <link rel="stylesheet" href="/css/callout_blocks.css">
     # Inject custom footer html code
   footer:
-    -
+    - <script src="/DIYJS/custom.js"></script>
       # INJECT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
-      # PLUGINS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
+    # PLUGINS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
     # Docs: https://redefine-docs.ohevan.com/plugins
 plugins:
   # RSS feed. Requires hexo-generator-feed (npm i hexo-generator-feed). See https://github.com/hexojs/hexo-generator-feed
