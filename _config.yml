@@ -173,7 +173,7 @@ home_banner:
     style: default # default, reverse, center
     # Social links
     links:
-      github: https://github.com/LeavesWebber
+      github: https://github.com/LeifWebber
       fa-solid fa-envelope: mailto:LeavesWebber@icloud.com
       bilibili: https://space.bilibili.com/515054976
       fa-solid fa-music: https://y.qq.com/n/ryqq/playlist/9362968509
