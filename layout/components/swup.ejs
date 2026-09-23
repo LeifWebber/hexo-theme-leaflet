@@ -23,5 +23,13 @@
         ],
         containers: ["#swup"],
     });
-</script>
 
+    swup.hooks.on("visit:start", (visit) => {
+        const pathname = new URL(visit.to.url, window.location.origin).pathname;
+        if (pathname === "/archives" || pathname.startsWith("/archives/")) {
+            // Archive HTML changes on every publish, including pages preloaded by Swup.
+            visit.cache.read = false;
+            visit.cache.write = false;
+        }
+    });
+</script>
