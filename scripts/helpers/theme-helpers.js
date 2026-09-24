@@ -100,6 +100,7 @@ hexo.extend.helper.register("getPostUrl", function (rootUrl, path) {
 
 hexo.extend.helper.register("renderJS", function (path, options = {}) {
   const _js = hexo.extend.helper.get("js").bind(hexo);
+  const siteRoot = this.config.root.endsWith('/') ? this.config.root : `${this.config.root}/`;
   const { module = false, async = false, swupReload = false } = options;
 
   if (Array.isArray(path)) {
@@ -123,6 +124,12 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
     custom: this.theme.cdn.custom_url,
   };
 
+  const localModules = new Set([
+    'js/build/main.js',
+    'js/build/layouts/lazyload.js',
+    'js/build/tools/imageViewer.js',
+  ]);
+
   const cdnPathHandle = (path) => {
     const cdnBase =
       cdnProviders[this.theme.cdn.provider] || cdnProviders.npmmirror;
@@ -132,7 +139,8 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
     // const asyncAttr = async ? "async" : "";
     const swupAttr = swupReload ? "data-swup-reload-script" : "";
 
-    if (this.theme.cdn.enable) {
+    // These fork-specific modules must come from this site, not the upstream CDN.
+    if (this.theme.cdn.enable && !localModules.has(path)) {
       if (this.theme.cdn.provider === "custom") {
         const customUrl = cdnBase
           .replace(":version", themeVersion)
@@ -146,12 +154,7 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
           .replace(":path", path)}" ${swupAttr}></script>`;
       }
     } else {
-      scriptTag = _js({
-        src: path,
-        type: module ? "module" : undefined,
-        "data-swup-reload-script": swupReload ? "" : undefined,
-        // async: async,
-      });
+      scriptTag = `<script ${typeAttr} src="${siteRoot}${path}" ${swupAttr}></script>`;
     }
 
     return scriptTag;

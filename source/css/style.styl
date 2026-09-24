@@ -1,6 +1,17 @@
 @require 'common/animated.styl'
 @require 'common/variables.styl'
 
+.progressive-image-frame
+  background-color var(--background-color)
+  background-position center
+  background-size cover
+
+.progressive-image
+  transition opacity .25s ease
+
+.js .progressive-image:not(.is-ready)
+  opacity 0
+
 @require 'common/basic.styl'
 @require 'common/markdown.styl'
 @require 'common/redefine-theme.styl'

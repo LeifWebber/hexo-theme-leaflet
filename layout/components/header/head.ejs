@@ -1,5 +1,27 @@
 <head>
     <meta charset="utf-8">
+    <script>
+        (() => {
+            const reveal = (image) => {
+                if (!image?.matches?.('img.progressive-image')) return;
+                Promise.resolve().then(() => image.decode?.()).catch(() => {}).finally(() => {
+                    image.classList.add('is-ready');
+                });
+            };
+            document.addEventListener('load', (event) => reveal(event.target), true);
+            document.addEventListener('error', (event) => {
+                if (event.target?.matches?.('img.progressive-image')) {
+                    event.target.classList.add('is-ready');
+                }
+            }, true);
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('img.progressive-image').forEach((image) => {
+                    if (image.complete && image.naturalWidth) reveal(image);
+                });
+            });
+            document.documentElement.classList.add('js');
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="<%= page.keywords || config.keywords || 'Hexo Theme Redefine' %>">
     <% if (!theme.global.open_graph) { %>
@@ -155,4 +177,3 @@
         <%- renderCSS('fontawesome/sharp-solid.min.css') %>
     <% } %>
 </head>
-

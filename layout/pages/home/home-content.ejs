@@ -25,9 +25,10 @@
                 <% } %>
 
                 <% if (post.thumbnail !== false && (post.thumbnail || post.cover || post.banner)) { %>
-                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                    <% const thumbnailPreview = imagePreview(articleThumbnail); %>
+                    <div class="home-article-thumbnail progressive-image-frame relative h-[150px] overflow-hidden rounded-t-large" style="<%= thumbnailPreview ? 'background-image:url(' + thumbnailPreview + ')' : '' %>">
                         <a href="<%- url_for(post.path) %>">
-                            <img src="<%- url_for(articleThumbnail) %>" alt="<%= post.title %>" class="w-full h-full object-cover dark:brightness-75 transition-all" />
+                            <img src="<%- url_for(articleThumbnail) %>" alt="<%= post.title %>" loading="lazy" class="progressive-image w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 <% } %>

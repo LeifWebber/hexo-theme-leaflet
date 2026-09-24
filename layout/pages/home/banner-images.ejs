@@ -1,0 +1,6 @@
+<% for (const mode of ['light', 'dark']) { %>
+    <% const url = theme.home_banner.image[mode]; const preview = imagePreview(url); %>
+    <div class="progressive-image-frame w-full h-full <%= mode === 'dark' ? 'hidden dark:block' : 'dark:hidden' %>" style="<%= preview ? 'background-image:url(' + preview + ')' : '' %>">
+        <img src="<%- url_for(url) %>" alt="" class="progressive-image w-full h-full object-cover" />
+    </div>
+<% } %>

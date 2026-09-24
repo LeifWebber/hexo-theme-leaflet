@@ -8,8 +8,20 @@ export default function initLazyLoad() {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const img = entry.target;
-        img.src = img.getAttribute("data-src");
-        img.removeAttribute("lazyload");
+        const source = img.getAttribute("data-src");
+        const preload = new Image();
+        preload.onload = async () => {
+          if (typeof preload.decode === "function") {
+            await preload.decode().catch(() => {});
+          }
+          img.src = source;
+          img.removeAttribute("lazyload");
+        };
+        preload.onerror = () => {
+          img.src = source;
+          img.removeAttribute("lazyload");
+        };
+        preload.src = source;
         observer.unobserve(img);
       }
     });

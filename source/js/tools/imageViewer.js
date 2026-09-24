@@ -134,7 +134,7 @@ export default function imageViewer() {
         currentImgIndex = index;
         isBigImage = true;
         showHandle(isBigImage);
-        targetImg.src = img.src;
+        targetImg.src = img.getAttribute('data-src') || img.src;
         document.addEventListener("keydown", escapeKeyListener);
       });
     });
