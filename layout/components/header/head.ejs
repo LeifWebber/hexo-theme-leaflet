@@ -138,23 +138,16 @@
     <%- renderCSS('fonts/GeistMono/geist-mono.css') %>
     <%- renderCSS('fonts/Geist/geist.css') %>
     <!--- Font Part-->
-    <% if (theme.home_banner.custom_font.enable) { %>
-        <link href="<%- theme.home_banner.custom_font.url %>" rel="stylesheet">
-    <% } %>
-    <% if (theme.articles.code_block.font.enable) { %>
-        <link href="<%- theme.articles.code_block.font.url %>" rel="stylesheet">
-    <% } %>
-    <% if (theme.global.fonts.chinese.enable) { %>
-        <link href="<%- theme.global.fonts.chinese.url %>" rel="stylesheet">
-    <% } %>
-    <% if (theme.global.fonts.english.enable) { %>
-        <link href="<%- theme.global.fonts.english.url %>" rel="stylesheet">
-    <% } %>
-    <% if (theme.global.fonts.title.enable) { %>
-        <link href="<%- theme.global.fonts.title.url %>" rel="stylesheet">
-    <% } %>
-    <% if (theme.global.preloader === true || theme.global.preloader.enable === true) { %>
-        <%- renderJS('libs/anime.min.js')%>
+    <% const fontUrls = [
+        theme.home_banner.custom_font,
+        theme.articles.code_block.font,
+        theme.global.fonts.chinese,
+        theme.global.fonts.english,
+        theme.global.fonts.title
+    ].filter(font => font?.enable && font.url).map(font => font.url); %>
+    <% for (const fontUrl of new Set(fontUrls)) { %>
+        <link href="<%- fontUrl %>" rel="stylesheet" media="print" onload="this.media='all'">
+        <noscript><link href="<%- fontUrl %>" rel="stylesheet"></noscript>
     <% } %>
 
     <%- export_config() %>

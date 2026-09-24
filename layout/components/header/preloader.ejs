@@ -25,7 +25,7 @@
     }
 
     .preloader {
-        display: flex;
+        display: none;
         flex-direction: column;
         gap: 1rem; /* Tailwind 'gap-4' is 1rem */
         align-items: center;
@@ -43,6 +43,8 @@
         transition: opacity 0.2s ease-in-out;
     }
 
+    .js .preloader { display: flex; }
+
     .ml13 {
         font-size: 3.2rem;
         /* text-transform: uppercase; */
@@ -51,17 +53,17 @@
         font-weight: 500;
         font-family: 'Chillax-Variable', sans-serif;
         text-align: center;
+        animation: preloader-enter 0.8s ease-out both;
     }
 
-    .ml13 .word {
-        display: inline-flex;
-        flex-wrap: wrap;
-        white-space: nowrap;
+    @keyframes preloader-enter {
+        from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+        to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
 
-    .ml13 .letter {
-        display: inline-block;
-        line-height: 1em;
+    @media (prefers-reduced-motion: reduce) {
+        .ml13 { animation: none; }
+        .preloader { transition: none; }
     }
 </style>
 
@@ -72,77 +74,37 @@
          %>
     </h2>
     <script>
-        var textWrapper = document.querySelector('.ml13');
-        // Split text into words
-        var words = textWrapper.textContent.trim().split(' ');
+        (() => {
+            const preloader = document.currentScript.parentElement;
+            let hidden = false;
 
-        // Clear the existing content
-        textWrapper.innerHTML = '';
-
-        // Wrap each word and its letters in spans
-        words.forEach(function(word) {
-            var wordSpan = document.createElement('span');
-            wordSpan.classList.add('word');
-            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
-            textWrapper.appendChild(wordSpan);
-            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
-        });
-
-        var animation = anime.timeline({ loop: true })
-            .add({
-                targets: '.ml13 .letter',
-                translateY: [20, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                filter: ['blur(5px)', 'blur(0px)'],
-                easing: "easeOutExpo",
-                duration: 1200,
-                delay: (el, i) => 300 + 20 * i,
-            })
-            .add({
-                targets: '.ml13 .letter',
-                translateY: [0, -20],
-                opacity: [1, 0],
-                filter: ['blur(0px)', 'blur(5px)'],
-                easing: "easeInExpo",
-                duration: 1000,
-                delay: (el, i) => 15 * i,
-                complete: function() {
-                    hidePreloader();
-                }
-            }, '-=700');
-
-
-        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
-
-        // If the theme status is not found in local storage, check the preferred color scheme
-        if (themeStatus === undefined || themeStatus === null) {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                themeStatus = 'dark';
-            } else {
-                themeStatus = 'light';
+            function hidePreloader() {
+                if (hidden) return;
+                hidden = true;
+                clearTimeout(deadline);
+                preloader.style.opacity = '0';
+                preloader.style.pointerEvents = 'none';
+                setTimeout(() => preloader.remove(), 200);
             }
-        }
 
-        // Now you can use the themeStatus variable in your code
-        if (themeStatus) {
-            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
-            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
-        } else {
-            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
-            document.documentElement.style.setProperty('--preloader-text-color', '#000');
-        }
+            // Start the deadline before reading preferences or waiting for page scripts.
+            const deadline = setTimeout(hidePreloader, 1500);
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', hidePreloader, { once: true });
+            } else {
+                hidePreloader();
+            }
 
-        window.addEventListener('load', function () {
-            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
-        });
-
-        function hidePreloader() {
-            var preloader = document.querySelector('.preloader');
-            preloader.style.opacity = '0';
-            setTimeout(function () {
-                preloader.style.display = 'none';
-            }, 200);
-        }
+            try {
+                const stored = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+                const dark = typeof stored === 'boolean'
+                    ? stored
+                    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.style.setProperty('--preloader-background-color', dark ? '#202124' : '#fff');
+                document.documentElement.style.setProperty('--preloader-text-color', dark ? '#fff' : '#000');
+            } catch (_) {
+                // The deadline still clears the overlay if storage is unavailable.
+            }
+        })();
     </script>
 </div>

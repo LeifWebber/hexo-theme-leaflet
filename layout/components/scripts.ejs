@@ -1,3 +1,5 @@
+<script src="<%- url_for('js/build/libs/anime.min.js') %>"></script>
+
 <%- renderJS([
     'tools/imageViewer.js',
     'utils.js',
@@ -52,11 +54,6 @@
         module: true
     }) %>
 <% } %>
-
-<% if (theme.global.preloader === false || theme.global.preloader.enable === false) { %>
-    <%- renderJS('libs/anime.min.js')%>
-<% } %>
-
 
 <% if (theme.articles.toc.enable) { %>
     <%- renderJS([
