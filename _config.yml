@@ -273,9 +273,6 @@ home:
       进一步了解我？: #取名随意
         icon: fa-solid fa-address-card #图标
         path: /me/
-      最近更新了什么？:
-        icon: fa-solid fa-solid fa-sparkles
-        path: /Gitlog/
       我 的 书 签:
         icon: fa-duotone fa-solid fa-book-bookmark #图标
         path: /bookmarks
