@@ -45,6 +45,7 @@ export const main = {
     }
   },
   refresh: () => {
+    initLazyLoad();
     initUtils();
     initModeToggle();
     initScrollTopBottom();
@@ -65,9 +66,6 @@ export const main = {
       initCopyCode();
     }
 
-    if (theme.articles.lazyload === true) {
-      initLazyLoad();
-    }
   },
 };
 

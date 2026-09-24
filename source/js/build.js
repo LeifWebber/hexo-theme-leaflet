@@ -58,7 +58,12 @@ async function copyFile(source, destination) {
 
 async function processFile(file) {
   try {
-    const code = await fs.readFile(file, "utf8");
+    // Entry tags and their imports must share a URL version, including cycles
+    // such as main -> utils -> main. This also refreshes cached dependencies.
+    const code = (await fs.readFile(file, "utf8")).replace(
+      /(^\s*import\b[^\n]*?\bfrom\s*["'])(\.{1,2}\/[^"'?]+\.js)(["'])/gm,
+      '$1$2?v=images-3$3',
+    );
     const relativePath = path.relative(SOURCE_DIR, file);
     const buildPath = path.join(BUILD_DIR, relativePath);
     const buildDirPath = path.dirname(buildPath);

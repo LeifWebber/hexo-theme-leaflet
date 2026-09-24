@@ -124,12 +124,6 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
     custom: this.theme.cdn.custom_url,
   };
 
-  const localModules = new Set([
-    'js/build/main.js',
-    'js/build/layouts/lazyload.js',
-    'js/build/tools/imageViewer.js',
-  ]);
-
   const cdnPathHandle = (path) => {
     const cdnBase =
       cdnProviders[this.theme.cdn.provider] || cdnProviders.npmmirror;
@@ -140,7 +134,7 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
     const swupAttr = swupReload ? "data-swup-reload-script" : "";
 
     // These fork-specific modules must come from this site, not the upstream CDN.
-    if (this.theme.cdn.enable && !localModules.has(path)) {
+    if (this.theme.cdn.enable && path.startsWith('js/build/libs/')) {
       if (this.theme.cdn.provider === "custom") {
         const customUrl = cdnBase
           .replace(":version", themeVersion)
@@ -154,7 +148,7 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
           .replace(":path", path)}" ${swupAttr}></script>`;
       }
     } else {
-      scriptTag = `<script ${typeAttr} src="${siteRoot}${path}" ${swupAttr}></script>`;
+      scriptTag = `<script ${typeAttr} src="${siteRoot}${path}?v=images-3" ${swupAttr}></script>`;
     }
 
     return scriptTag;

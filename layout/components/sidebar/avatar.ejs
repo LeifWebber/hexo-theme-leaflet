@@ -1,3 +1,7 @@
 <div class="avatar flex justify-center">
-    <%- image_tag(theme.defaults.avatar) %>
+    <% if (typeof theme.defaults.avatar === 'string' && theme.defaults.avatar.trim()) { %>
+    <%- progressiveImage(url_for(theme.defaults.avatar), { alt: theme.info.author || config.author, kind: 'avatar', width: 80, height: 80, style: 'width:80px;height:80px;border-radius:18px' }) %>
+    <% } else { %>
+    <span class="flex w-20 h-20 items-center justify-center bg-second-background-color rounded-large" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+    <% } %>
 </div>

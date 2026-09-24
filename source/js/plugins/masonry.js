@@ -1,64 +1,69 @@
-export function initMasonry() {
-  var loadingPlaceholder = document.querySelector(".loading-placeholder");
-  var masonryContainer = document.querySelector("#masonry-container");
-  if (!loadingPlaceholder || !masonryContainer) return;
+let cleanupMasonry = () => {};
 
-  loadingPlaceholder.style.display = "block";
-  masonryContainer.style.display = "none";
-
-  var images = document.querySelectorAll(
-    "#masonry-container .masonry-item img",
-  );
-  var loadedCount = 0;
-
-  function onImageLoad() {
-    loadedCount++;
-    if (loadedCount === images.length) {
-      initializeMasonryLayout();
-    }
-  }
-
-  for (var i = 0; i < images.length; i++) {
-    var img = images[i];
-    if (img.complete) {
-      onImageLoad();
-    } else {
-      img.addEventListener("load", onImageLoad);
-    }
-  }
-
-  if (loadedCount === images.length) {
-    initializeMasonryLayout();
-  }
-  function initializeMasonryLayout() {
-    loadingPlaceholder.style.opacity = 0;
-    setTimeout(() => {
-      loadingPlaceholder.style.display = "none";
-      masonryContainer.style.display = "block";
-      var screenWidth = window.innerWidth;
-      var baseWidth;
-      if (screenWidth >= 768) {
-        baseWidth = 255;
-      } else {
-        baseWidth = 150;
-      }
-      var masonry = new MiniMasonry({
-        baseWidth: baseWidth,
-        container: masonryContainer,
-        gutterX: 10,
-        gutterY: 10,
-        surroundingGutter: false,
-      });
-      masonry.layout();
-      masonryContainer.style.opacity = 1;
-    }, 100);
-  }
+export function destroyMasonry() {
+  cleanupMasonry();
+  cleanupMasonry = () => {};
 }
 
-if (data.masonry) {
-  try {
-    swup.hooks.on("page:view", initMasonry);
-  } catch (e) {}
+export function initMasonry() {
+  destroyMasonry();
+  const container = document.querySelector("#masonry-container");
+  if (!container) return;
 
-  document.addEventListener("DOMContentLoaded", initMasonry);
+  window.LeavesImages?.init(container);
+  // CSS supplies a usable grid even if the layout library fails to load.
+  if (!container.children.length || typeof MiniMasonry === "undefined") return;
+
+  container.classList.add("masonry-active");
+  const masonry = new MiniMasonry({
+    baseWidth: window.innerWidth >= 768 ? 255 : 150,
+    container,
+    gutterX: 10,
+    gutterY: 10,
+    surroundingGutter: false,
+  });
+  let frame = null;
+  let active = true;
+
+  function scheduleLayout() {
+    if (!active || frame !== null) return;
+    frame = requestAnimationFrame(() => {
+      frame = null;
+      if (!active || !container.isConnected) return;
+      masonry.conf.baseWidth = window.innerWidth >= 768 ? 255 : 150;
+      masonry.layout();
+    });
+  }
+
+  // Dimensions reserve each tile immediately. An individual decode or failure
+  // can refine its layout without delaying any of the other photographs.
+  container.addEventListener("load", scheduleLayout, true);
+  container.addEventListener("error", scheduleLayout, true);
+  container.addEventListener("leaves:image-settled", scheduleLayout);
+  window.addEventListener("resize", scheduleLayout, { passive: true });
+  scheduleLayout();
+
+  cleanupMasonry = () => {
+    active = false;
+    if (frame !== null) cancelAnimationFrame(frame);
+    container.removeEventListener("load", scheduleLayout, true);
+    container.removeEventListener("error", scheduleLayout, true);
+    container.removeEventListener("leaves:image-settled", scheduleLayout);
+    window.removeEventListener("resize", scheduleLayout);
+    masonry.destroy();
+    container.classList.remove("masonry-active");
+  };
+}
+
+if (typeof data === "undefined" || data.masonry) {
+  if (typeof swup !== "undefined") {
+    swup.hooks.before("content:replace", destroyMasonry);
+    swup.hooks.on("page:view", initMasonry);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMasonry, { once: true });
+  } else {
+    initMasonry();
+  }
 }

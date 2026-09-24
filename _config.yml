@@ -452,7 +452,7 @@ inject:
     - <link rel="stylesheet" href="/css/callout_blocks.css">
     # Inject custom footer html code
   footer:
-    - <script src="/DIYJS/custom.js"></script>
+    - <script src="/DIYJS/custom.js?v=images-3"></script>
       # INJECT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 

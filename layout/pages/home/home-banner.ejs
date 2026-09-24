@@ -87,7 +87,7 @@
                         let qrs = theme.home_banner.social_links.qrs;
                         let qrCount = 0;
                         for (const key in qrs) {
-                            if(qrs[key]) {
+                            if(typeof qrs[key] === 'string' && qrs[key].trim()) {
                                 qrCount++;
                             }
                         }
@@ -96,14 +96,13 @@
                         <div class="social-links-divider vertical-separator w-[1px] h-4 bg-third-text-color mx-0.5"></div>
 
                         <% for (const key in qrs) { %>
-                            <% if(qrs[key]) { %>
+                            <% if(typeof qrs[key] === 'string' && qrs[key].trim()) { %>
                                 <% if(key.includes("fa-")) { %>
                                     <span class="social-contact-item-qr cursor-pointer group">
                                         <a target="_blank">
                                             <i class="<%= key %> fa-fw fa-lg"></i>
                                             <div class="social-qr-container absolute h-auto bg-background-color-transparent-40 border border-white/20 dark:border-gray-500/30 overflow-hidden rounded-2xl bottom-0 mb-14 right-0 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-0.5 group-hover:translate-y-0 transition-all">
-                                                <img class="social-contacts-qr w-64"
-                                                     src="<%- url_for(theme.home_banner.social_links.qrs[key]) %>"/>
+                                                <%- progressiveImage(url_for(theme.home_banner.social_links.qrs[key]), { alt: key + ' QR code', kind: 'qr', className: 'social-contacts-qr w-64', style: 'width:256px;height:auto' }) %>
                                             </div>
                                         </a>
                                     </span>
@@ -112,8 +111,7 @@
                                         <a target="_blank">
                                             <i class="fa-brands fa-fw fa-lg fa-<%= key %>"></i>
                                             <div class="social-qr-container absolute h-auto bg-background-color-transparent-40 border border-white/20 dark:border-gray-500/30 overflow-hidden rounded-2xl bottom-0 mb-14 right-0 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-0.5 group-hover:translate-y-0 transition-all">
-                                                <img class="social-contacts-qr w-64"
-                                                     src="<%- url_for(theme.home_banner.social_links.qrs[key]) %>"/>
+                                                <%- progressiveImage(url_for(theme.home_banner.social_links.qrs[key]), { alt: key + ' QR code', kind: 'qr', className: 'social-contacts-qr w-64', style: 'width:256px;height:auto' }) %>
                                             </div>
                                         </a>
                                     </span>

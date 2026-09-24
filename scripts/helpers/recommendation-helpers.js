@@ -328,17 +328,17 @@ hexo.extend.helper.register("articleRecommendationGenerator", function (post) {
   }
   const recommendationSet = hexo.locals.get("recommendationSet");
   const recommendedArticles = recommendationSet[post.path];
-  return userInterface(recommendedArticles, cfg);
+  return userInterface(recommendedArticles, cfg, this.progressiveImage.bind(this));
 });
 
-function userInterface(recommendedArticles, cfg) {
+function userInterface(recommendedArticles, cfg, progressiveImage) {
   let html = "";
   let htmlMobile = "";
   for (const item of recommendedArticles) {
-    html += itemInterface(item);
+    html += itemInterface(item, progressiveImage);
   }
   for (const itemMobile of recommendedArticles.slice(0, cfg.mobile_limit)) {
-    htmlMobile += itemInterface(itemMobile);
+    htmlMobile += itemInterface(itemMobile, progressiveImage);
   }
   return `
   <div class="recommended-article px-2 sm:px-6 md:px-8">
@@ -357,11 +357,11 @@ function userInterface(recommendedArticles, cfg) {
   </div>`;
 }
 
-function itemInterface(item) {
+function itemInterface(item, progressiveImage) {
   return `<a class="recommended-article-item" href="${
     hexo.config.root + item.path
   }" title="${item.title}" rel="bookmark">
-  <img src="${item.headimg}" alt="${item.title}" class="!max-w-none">
+  ${progressiveImage(item.headimg, { alt: item.title, kind: 'cover', className: '!max-w-none' })}
   <span class="title">${item.title}</span>
 </a>`;
 }

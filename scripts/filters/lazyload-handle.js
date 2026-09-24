@@ -1,24 +1,20 @@
-'use strict'
+'use strict';
+
+// Keep original sources intact so native loading and no-script browsing work.
+// The site's image pipeline supplies dimensions, placeholders and transitions.
 hexo.extend.filter.register(
   'after_post_render',
   function (data) {
-    const theme = hexo.theme.config;
-    if (!theme.articles.lazyload || !theme.articles.lazyload) return;
+    if (!hexo.theme.config.articles.lazyload) return data;
     data.content = data.content.replace(
-      // Match 'img' tags width the src attribute.
-      /<img([^>]*)src="([^"]*)"([^>\/]*)\/?\s*>/gim,
-      function (match, attrBegin, src, attrEnd) {
-        // Exit if the src doesn't exists.
-        if (!src) return match;
-
-        return `<img ${attrBegin}
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="${src}"
-                     ${attrEnd}
-                >`
+      /<img\b[^>]*>/gi,
+      function (tag) {
+        return /\bloading\s*=/i.test(tag)
+          ? tag
+          : tag.replace(/^<img\b/i, '<img loading="lazy"');
       }
-    )
+    );
+    return data;
   },
   1
 );

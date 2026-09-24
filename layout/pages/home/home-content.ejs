@@ -9,30 +9,22 @@
                     </div>
                 <% } %>
 
-                <%  let articleThumbnail = "";
-                if (post.cover || post.banner || (post.thumbnail && post.thumbnail !== false)) { %>
-                    <%
-                    if (post.thumbnail && post.thumbnail !== null) {
-                      articleThumbnail = post.thumbnail;
-                    } else if (post.cover && post.cover.includes("/")) {
-                      articleThumbnail = post.cover;
-                    } else if (post.banner && post.banner.includes("/")) {
-                      articleThumbnail = post.banner;
-                    } else if (config.marked.postAsset && config.marked.postAsset == true) {
-                      articleThumbnail = [post.path, post.cover || post.banner].join("/");
-                    }
-                    %>
-                <% } %>
+                <%
+                let articleThumbnail = [post.thumbnail, post.cover, post.banner].find(value => typeof value === 'string' && value.trim()) || '';
+                if (articleThumbnail && !articleThumbnail.includes('/') && config.marked?.postAsset) {
+                    articleThumbnail = [post.path, articleThumbnail].join('/');
+                }
+                const hasThumbnail = post.thumbnail !== false && Boolean(articleThumbnail);
+                %>
 
-                <% if (post.thumbnail !== false && (post.thumbnail || post.cover || post.banner)) { %>
-                    <% const thumbnailPreview = imagePreview(articleThumbnail); %>
-                    <div class="home-article-thumbnail progressive-image-frame relative h-[150px] overflow-hidden rounded-t-large" style="<%= thumbnailPreview ? 'background-image:url(' + thumbnailPreview + ')' : '' %>">
-                        <a href="<%- url_for(post.path) %>">
-                            <img src="<%- url_for(articleThumbnail) %>" alt="<%= post.title %>" loading="lazy" class="progressive-image w-full h-full object-cover dark:brightness-75 transition-all" />
+                <% if (hasThumbnail) { %>
+                    <div class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                        <a href="<%- url_for(post.path) %>" class="block w-full h-full">
+                            <%- progressiveImage(url_for(articleThumbnail), { alt: post.title, kind: 'cover', className: 'w-full h-full object-cover dark:brightness-75' }) %>
                         </a>
                     </div>
                 <% } %>
-                <div class="flex flex-col gap-5 px-7 pb-7 <%= post.thumbnail !== false && (post.thumbnail || post.cover || post.banner) ? "pt-5" : "pt-7" %>">
+                <div class="flex flex-col gap-5 px-7 pb-7 <%= hasThumbnail ? "pt-5" : "pt-7" %>">
                     <h3 class="home-article-title">
                         <a href="<%- url_for(post.path) %>">
                             <%= post.title %>
@@ -42,7 +34,7 @@
                     <div class="home-article-content markdown-body">
                         <% if (post.excerpt && post.excerpt == "false") { %>
                         <% } else if (post.excerpt && post.excerpt !== "false") { %>
-                            <%- render(post.excerpt, "markdown") %>
+                            <%- imageContent(render(post.excerpt, "markdown")) %>
                         <% } else { %>
                             <%
                                 const excerptLength = theme.home.excerpt_length || 200;

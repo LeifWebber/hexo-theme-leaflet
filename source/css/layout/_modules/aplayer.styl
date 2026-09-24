@@ -284,6 +284,21 @@ $aplayer-height-lrc= $aplayer-height + $lrc-height - 6
         opacity 1
     }
 
+    .aplayer-decoded-cover {
+      position absolute
+      inset 0
+      border-radius inherit
+      background-size cover
+      background-position center
+      pointer-events none
+      opacity 0
+      transition opacity 180ms ease
+
+      &[data-image-state="ready"] {
+        opacity 1
+      }
+    }
+
     .aplayer-button {
       position absolute
       border-radius 50%
@@ -796,4 +811,10 @@ if (hexo-config('plugins.aplayer.enable') == true && hexo-config('plugins.aplaye
     width: 13px !important
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aplayer .aplayer-pic .aplayer-decoded-cover {
+    transition none
+  }
 }

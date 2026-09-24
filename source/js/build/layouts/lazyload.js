@@ -1,2 +1,2 @@
-export default function initLazyLoad(){const e=document.querySelectorAll("img"),t=new IntersectionObserver((e,t)=>{e.forEach(e=>{if(e.isIntersecting){const o=e.target,r=o.getAttribute("data-src"),a=new Image;a.onload=async()=>{"function"==typeof a.decode&&await a.decode().catch(()=>{}),o.src=r,o.removeAttribute("lazyload")},a.onerror=()=>{o.src=r,o.removeAttribute("lazyload")},a.src=r,t.unobserve(o)}})},{rootMargin:"0px",threshold:.1});e.forEach(e=>{e.hasAttribute("lazyload")&&t.observe(e)})}
+import i from"../utils/image-loading.js?v=images-3";export default function initLazyLoad(t=document){i.init(t)}
 //# sourceMappingURL=lazyload.js.map

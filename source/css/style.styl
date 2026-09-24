@@ -12,6 +12,10 @@
 .js .progressive-image:not(.is-ready)
   opacity 0
 
+@media (prefers-reduced-motion: reduce)
+  .progressive-image
+    transition none
+
 @require 'common/basic.styl'
 @require 'common/markdown.styl'
 @require 'common/redefine-theme.styl'
@@ -37,3 +41,180 @@
 
 if (hexo-config('home.sidebar.enable') == true)
   @require 'layout/home-sidebar.styl'
+
+// Shared image lifecycle. No-JS pages keep the original image fully visible.
+.image-placeholder
+  position relative
+  display inline-block
+  vertical-align middle
+  max-width 100%
+  overflow hidden
+  border-radius inherit
+  background-color var(--second-background-color)
+  line-height 0
+  isolation isolate
+
+  &::before
+    content ""
+    position absolute
+    inset 0
+    z-index -1
+    background-image var(--image-preview, none)
+    background-position center
+    background-size cover
+    opacity 0
+    transition opacity .25s ease
+
+  > picture
+    display block
+    width 100%
+    height 100%
+
+  > img.managed-image, > picture > img.managed-image
+    display block
+    box-sizing border-box
+    max-width 100%
+    width 100%
+    height auto
+    margin 0
+    padding 0
+    opacity 1
+    transition opacity .25s ease
+
+  > .image-fallback
+    display none
+    position absolute
+    inset 0
+    align-items center
+    justify-content center
+    padding .5rem
+    box-sizing border-box
+    background var(--second-background-color)
+    color var(--second-text-color)
+    font-size .8rem
+    line-height 1.5
+    text-align center
+    overflow hidden
+    overflow-wrap anywhere
+
+.image-placeholder--content
+  display block
+  border-radius $usr-img-border-radius
+
+.markdown-body .image-placeholder--content
+  if (hexo-config('articles.style.image_alignment') == 'center')
+    margin 1rem auto
+  else
+    margin 1rem 0
+
+.image-placeholder--cover, .image-placeholder--avatar, .image-placeholder--icon
+  width 100%
+  height 100%
+
+  > img.managed-image, > picture > img.managed-image
+    width 100%
+    height 100%
+    object-fit cover
+
+.image-placeholder--icon, .image-placeholder--qr, .image-placeholder--avatar
+  &::before
+    background-image none
+
+.image-placeholder--icon
+  > img.managed-image, > picture > img.managed-image
+    object-fit contain
+
+.image-placeholder--qr
+  > img.managed-image, > picture > img.managed-image
+    position absolute
+    inset 0
+    height 100%
+    object-fit contain
+
+.markdown-body .image-placeholder--qr
+  display block
+  margin 1rem auto
+
+[data-waline] .image-placeholder--icon
+  vertical-align baseline
+  border-radius .2em
+
+[data-waline] .image-placeholder--avatar
+  border-radius var(--waline-avatar-radius)
+
+.js .image-placeholder[data-image-state="pending"], .js .image-placeholder[data-image-state="error"]
+  > img.managed-image, > picture > img.managed-image
+    opacity 0
+
+.js .image-placeholder[data-image-state="pending"]::before
+  opacity 1
+
+.js .image-placeholder[data-image-state="error"] > .image-fallback
+  display flex
+
+.image-placeholder[data-image-state="ready"]::before
+  opacity 0
+
+.post-page-container .article-content-container .recommended-article .recommended-article-group .recommended-article-item > .image-placeholder
+  display block
+  width calc(100% + 24px)
+  max-width none
+  height 150px
+  margin -12px -12px 0 !important
+  flex-shrink 0
+  border-radius 12px 12px 0 0
+
+  > img.managed-image
+    width 100%
+    height 100%
+    margin 0 !important
+    display block
+
+  > .image-fallback
+    display none
+    margin 0
+
+  &[data-image-state="error"] > .image-fallback
+    display flex
+
+.js .image-placeholder--avatar[data-image-state="error"], .js .image-placeholder--icon[data-image-state="error"]
+  > .image-fallback
+    font-size 0
+    padding 0
+
+    &::before
+      content "◌"
+      font-size 1rem
+      line-height 1
+
+// Viewer state wins over its existing active-image opacity rule.
+.image-viewer-container
+  &[data-image-state="pending"], &[data-image-state="error"]
+    > img
+      opacity 0
+      pointer-events none
+
+  > .image-viewer-status
+    position absolute
+    left 50%
+    top 50%
+    transform translate(-50%, -50%)
+    border-radius .75rem
+    padding 1rem 1.25rem
+    background var(--background-color)
+    color var(--default-text-color)
+    line-height 1.5
+    text-align center
+
+    &[hidden]
+      display none
+
+    button
+      display block
+      margin .5rem auto 0
+      padding .25rem .75rem
+      color var(--primary-color)
+
+@media (prefers-reduced-motion: reduce)
+  .image-placeholder::before, .image-placeholder > img.managed-image, .image-placeholder > picture > img.managed-image, .image-viewer-container, .image-viewer-container img
+    transition none

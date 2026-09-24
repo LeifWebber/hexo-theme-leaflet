@@ -1,6 +1,8 @@
 <% for (const mode of ['light', 'dark']) { %>
-    <% const url = theme.home_banner.image[mode]; const preview = imagePreview(url); %>
-    <div class="progressive-image-frame w-full h-full <%= mode === 'dark' ? 'hidden dark:block' : 'dark:hidden' %>" style="<%= preview ? 'background-image:url(' + preview + ')' : '' %>">
-        <img src="<%- url_for(url) %>" alt="" class="progressive-image w-full h-full object-cover" />
+    <% const candidates = theme.home_banner.image || {}; const url = [candidates[mode], candidates.light, candidates.dark].find(value => typeof value === 'string' && value.trim()); %>
+    <% if (url) { %>
+    <div class="w-full h-full <%= mode === 'dark' ? 'hidden dark:block' : 'dark:hidden' %>">
+        <%- progressiveImage(url_for(url), { alt: '', kind: 'cover', loading: 'eager', className: 'w-full h-full object-cover' }) %>
     </div>
+    <% } %>
 <% } %>
