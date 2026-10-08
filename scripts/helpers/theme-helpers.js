@@ -166,7 +166,10 @@ hexo.extend.helper.register("renderJS", function (path, options = {}) {
 });
 
 hexo.extend.helper.register("renderCSS", function (path) {
-  const _css = hexo.extend.helper.get("css").bind(hexo);
+  // Bind to the view locals, not the hexo instance: hexo's `css` helper resolves
+  // through url_for, which needs `this.path` to build relative links. Binding to
+  // `hexo` leaves it undefined, so every stylesheet was emitted depth-unaware.
+  const _css = hexo.extend.helper.get("css").bind(this);
 
   const cdnProviders = {
     zstatic:
